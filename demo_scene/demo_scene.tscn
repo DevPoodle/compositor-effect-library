@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bi1k4c61mibok"]
+
+[ext_resource type="Script" uid="uid://bvsjc7c2u5f" path="res://compositor_effects/sample_effect/sample_effect.gd" id="1_jlxg6"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o0x3b"]
+sky_horizon_color = Color(0.65173244, 0.67438686, 0.7061775, 1)
+ground_bottom_color = Color(0.15469807, 0.17631572, 0.20747814, 1)
+ground_horizon_color = Color(0.65173244, 0.67438686, 0.7061775, 1)
+
+[sub_resource type="Sky" id="Sky_jlxg6"]
+sky_material = SubResource("ProceduralSkyMaterial_o0x3b")
+
+[sub_resource type="Environment" id="Environment_gl3j5"]
+background_mode = 2
+sky = SubResource("Sky_jlxg6")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_gl3j5"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = true
+script = ExtResource("1_jlxg6")
+metadata/_custom_type_script = "uid://bvsjc7c2u5f"
+
+[sub_resource type="Compositor" id="Compositor_kuw5p"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_gl3j5")])
+
+[sub_resource type="BoxMesh" id="BoxMesh_wuekb"]
+
+[node name="DemoScene" type="Node3D" unique_id=1744791175]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1547005463]
+environment = SubResource("Environment_gl3j5")
+compositor = SubResource("Compositor_kuw5p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=629026296]
+transform = Transform3D(5.0595636, 0, 0, 0, 1, 0, 0, 0, 7.2831254, 0, 0.12893775, 0)
+mesh = SubResource("BoxMesh_wuekb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1478675203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42198277, 1.1017367, 0.3346293)
+mesh = SubResource("BoxMesh_wuekb")

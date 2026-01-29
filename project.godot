@@ -12,7 +12,11 @@ config_version=5
 
 config/name="Compositor Effect Library"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
+
+[debug]
+
+gdscript/warnings/narrowing_conversion=0
 
 [physics]
 

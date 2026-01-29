@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://bsgb6mbb1r6cc"
+path="res://.godot/imported/sample_effect.glsl-de320f1105cb7fda15dbf0d059e942eb.res"
+
+[deps]
+
+source_file="res://compositor_effects/sample_effect/sample_effect.glsl"
+dest_files=["res://.godot/imported/sample_effect.glsl-de320f1105cb7fda15dbf0d059e942eb.res"]
+
+[params]
+
