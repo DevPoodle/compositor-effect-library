@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bi1k4c61mibok"]
 
 [ext_resource type="Script" uid="uid://bvsjc7c2u5f" path="res://compositor_effects/sample_effect/sample_effect.gd" id="1_jlxg6"]
+[ext_resource type="Script" uid="uid://cewr0caft1mwk" path="res://compositor_effects/outline/outline.gd" id="2_gl3j5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o0x3b"]
 sky_horizon_color = Color(0.65173244, 0.67438686, 0.7061775, 1)
@@ -24,8 +25,18 @@ needs_normal_roughness = true
 script = ExtResource("1_jlxg6")
 metadata/_custom_type_script = "uid://bvsjc7c2u5f"
 
+[sub_resource type="CompositorEffect" id="CompositorEffect_kuw5p"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_gl3j5")
+metadata/_custom_type_script = "uid://cewr0caft1mwk"
+
 [sub_resource type="Compositor" id="Compositor_kuw5p"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_gl3j5")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_gl3j5"), SubResource("CompositorEffect_kuw5p")])
 
 [sub_resource type="BoxMesh" id="BoxMesh_wuekb"]
 
