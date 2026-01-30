@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="Compositor Effect Library"
+config/tags=PackedStringArray("educational")
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
 [debug]
 
 gdscript/warnings/narrowing_conversion=0
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [physics]
 
