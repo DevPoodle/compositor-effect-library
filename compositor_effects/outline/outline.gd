@@ -1,6 +1,6 @@
 @tool
 extends CompositorEffect
-class_name OutlineEffect
+class_name Outline
 
 var rd := RenderingServer.get_rendering_device()
 var shader: RID

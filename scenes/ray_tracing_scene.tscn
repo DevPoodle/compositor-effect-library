@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dc1b2ht0fwj7t"]
+
+[ext_resource type="Script" uid="uid://cek23ou33ky6g" path="res://compositor_effects/ray_tracing/ray_tracing.gd" id="4_4ril2"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bvrnq"]
+sky_horizon_color = Color(0.65173244, 0.67438686, 0.7061775, 1)
+ground_bottom_color = Color(0.06258161, 0.07490475, 0.11720439, 1)
+ground_horizon_color = Color(0.6628057, 0.6858752, 0.7166374, 1)
+ground_curve = 0.042870797
+energy_multiplier = 3.0
+
+[sub_resource type="Sky" id="Sky_jlxg6"]
+sky_material = SubResource("ProceduralSkyMaterial_bvrnq")
+
+[sub_resource type="Environment" id="Environment_6pbdt"]
+background_mode = 2
+sky = SubResource("Sky_jlxg6")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ailwu"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = true
+script = ExtResource("4_4ril2")
+metadata/_custom_type_script = "uid://cek23ou33ky6g"
+
+[sub_resource type="Compositor" id="Compositor_rdnyb"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ailwu")])
+
+[node name="RayTracingScene" type="Node3D" unique_id=1374247362]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=966251687]
+transform = Transform3D(0.7769037, -0.44280106, 0.44760233, 0.047367178, 0.74999994, 0.6597398, -0.6278353, -0.4913525, 0.603652, 0, 0, 0)
+sky_mode = 2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=187282253]
+environment = SubResource("Environment_6pbdt")
+compositor = SubResource("Compositor_rdnyb")

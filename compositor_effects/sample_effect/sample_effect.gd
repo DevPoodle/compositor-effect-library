@@ -11,6 +11,7 @@ var depth_sampler: RID
 var normal_roughness_sampler: RID
 
 func _init() -> void:
+	needs_normal_roughness = true
 	var shader_file := preload("sample_effect.glsl")
 	var shader_spirv := shader_file.get_spirv()
 	shader = rd.shader_create_from_spirv(shader_spirv)

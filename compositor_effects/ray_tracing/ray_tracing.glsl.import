@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://dw0u3g7jft85b"
+path="res://.godot/imported/ray_tracing.glsl-729579110687d6b284d90c455e4ef57d.res"
+
+[deps]
+
+source_file="res://compositor_effects/ray_tracing/ray_tracing.glsl"
+dest_files=["res://.godot/imported/ray_tracing.glsl-729579110687d6b284d90c455e4ef57d.res"]
+
+[params]
+
