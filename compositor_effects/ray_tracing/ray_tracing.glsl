@@ -120,7 +120,9 @@ Hit findClosestHit(inout uint state, Ray ray) {
 }
 
 vec3 getEnvironment(Ray ray) {
-	return texture(sky_sampler, vec2(atan(ray.dir.x, ray.dir.z) / (2.0 * 3.141592) + 0.5, (-ray.dir.y + 1.0) / 2.0)).rgb;
+	float x_coord = atan(ray.dir.x, ray.dir.z) / (2.0 * 3.141592) + 0.5;
+	float y_coord = -asin(ray.dir.y) / 3.141592 + 0.5;
+	return texture(sky_sampler, vec2(x_coord, y_coord)).rgb;
 }
 
 vec4 bounceRay(inout uint state, Ray ray) {

@@ -26,7 +26,7 @@ vec4 get_normal_roughness(vec2 uv) {
 	if (roughness > 0.5)
 		roughness = 1.0 - roughness;
 	roughness /= (127.0 / 255.0);
-	return vec4(normalize(normal_roughness.xyz * 2.0 - 1.0) * 0.5 + 0.5, roughness);
+	return vec4(normalize(normal_roughness.xyz * 2.0 - 1.0), roughness);
 }
 
 const vec2 TARGET_RESOLUTION = vec2(320.0, 180.0);
@@ -68,11 +68,11 @@ void main() {
 	vec3 n0 = get_normal_roughness(uv_samples[1]).xyz;
 	vec3 n1 = get_normal_roughness(uv_samples[2]).xyz;
 	
-	float normal_difference = distance(nc, n0) + distance(nc, n1);
+	float normal_difference = distance(nc, n0) * step(nc.x, n0.x) + distance(nc, n1) * step(n1.y, nc.y);
 	float normal_border = step(0.01, normal_difference);
 	
 	float depth_difference = abs(dc - d0) + abs(dc - d1);
 	float depth_border = 1.0 - clamp(step(dc / 8.0 + 0.5, depth_difference), 0.0, 1.0);
 	
-	imageStore(color_image, ivec2(uv), depth_border * (1.0 + normal_border * 0.5) * quantized_color);
+	imageStore(color_image, ivec2(uv), depth_border * (1.0 + normal_border * 2.5) * quantized_color);
 }
