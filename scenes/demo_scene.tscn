@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://bvsjc7c2u5f"
 [sub_resource type="CompositorEffect" id="CompositorEffect_kuw5p"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://cewr0caft1mwk"
 [sub_resource type="CompositorEffect" id="CompositorEffect_wuekb"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = true

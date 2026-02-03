@@ -68,11 +68,11 @@ void main() {
 	vec3 n0 = get_normal_roughness(uv_samples[1]).xyz;
 	vec3 n1 = get_normal_roughness(uv_samples[2]).xyz;
 	
-	float normal_difference = distance(nc, n0) * step(nc.x, n0.x) + distance(nc, n1) * step(n1.y, nc.y);
-	float normal_border = step(0.01, normal_difference);
-	
 	float depth_difference = abs(dc - d0) + abs(dc - d1);
-	float depth_border = 1.0 - clamp(step(dc / 8.0 + 0.5, depth_difference), 0.0, 1.0);
+	float depth_border = 1.0 - clamp(step(dc / 8.0 + 0.1, depth_difference), 0.0, 1.0);
+	
+	float normal_difference = distance(nc, n0) * step(nc.x, n0.x) + distance(nc, n1) * step(n1.y, nc.y);
+	float normal_border = step(dc / 12.0, normal_difference * step(depth_difference, 0.1));
 	
 	imageStore(color_image, ivec2(uv), depth_border * (1.0 + normal_border * 2.5) * quantized_color);
 }

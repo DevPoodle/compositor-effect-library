@@ -20,7 +20,7 @@ float get_linear_depth(vec2 uv) {
 }
 
 float get_cutoff(float depth) {
-	return 0.5 + depth / 8.0;
+	return depth / 24.0;
 }
 
 const float RADIUS = 2.0;
