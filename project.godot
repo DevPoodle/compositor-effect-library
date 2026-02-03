@@ -13,7 +13,7 @@ config_version=5
 config/name="Compositor Effect Library"
 config/tags=PackedStringArray("educational")
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://assets/icon.svg"
+config/icon="uid://jeocpe0lqkho"
 
 [debug]
 
