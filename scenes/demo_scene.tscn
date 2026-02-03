@@ -6,7 +6,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0ekuu"]
 sky_horizon_color = Color(0.65173244, 0.67438686, 0.7061775, 1)
-ground_bottom_color = Color(0.06258161, 0.07490475, 0.11720439, 1)
+ground_bottom_color = Color(0.16186962, 0.18327492, 0.26157197, 1)
 ground_horizon_color = Color(0.6628057, 0.6858752, 0.7166374, 1)
 ground_curve = 0.042870797
 energy_multiplier = 2.0
@@ -32,7 +32,7 @@ metadata/_custom_type_script = "uid://bvsjc7c2u5f"
 [sub_resource type="CompositorEffect" id="CompositorEffect_kuw5p"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://cewr0caft1mwk"
 [sub_resource type="CompositorEffect" id="CompositorEffect_wuekb"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = true
@@ -54,6 +54,22 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_gl3j
 
 [sub_resource type="BoxMesh" id="BoxMesh_wuekb"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ekuu"]
+albedo_color = Color(1, 0.4114743, 0.45929545, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8m1ix"]
+albedo_color = Color(2.5027991e-06, 0.6757829, 0.989631, 1)
+metallic = 0.2
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bk2b3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bk2b3"]
+albedo_color = Color(0.11232432, 0.764664, 0, 1)
+roughness = 0.8
+
+[sub_resource type="TorusMesh" id="TorusMesh_64dih"]
+
 [node name="DemoScene" type="Node3D" unique_id=1744791175]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1636746430]
@@ -64,10 +80,25 @@ shadow_enabled = true
 environment = SubResource("Environment_bk2b3")
 compositor = SubResource("Compositor_kuw5p")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=629026296]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=629026296]
 transform = Transform3D(5.0595636, 0, 0, 0, 1, 0, 0, 0, 7.2831254, 0, 0.12893775, 0)
 mesh = SubResource("BoxMesh_wuekb")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1478675203]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42198277, 1.1017367, 0.3346293)
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=1478675203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79742754, 1.1017367, 2.1087904)
+material_override = SubResource("StandardMaterial3D_0ekuu")
 mesh = SubResource("BoxMesh_wuekb")
+
+[node name="Cylinder" type="MeshInstance3D" parent="." unique_id=1177000524]
+transform = Transform3D(1.7548864, 0, 0, 0, 1.1563874, 0, 0, 0, 1.7548864, -1.4080586, 1.5088457, -0.5791962)
+material_override = SubResource("StandardMaterial3D_8m1ix")
+mesh = SubResource("CylinderMesh_bk2b3")
+
+[node name="Torus" type="MeshInstance3D" parent="." unique_id=1787432919]
+transform = Transform3D(1.0838048, 0, 0, 0, 1.3829808, 0, 0, 0, 1.0838048, 0.989499, 0.90669596, -2.1680884)
+material_override = SubResource("StandardMaterial3D_bk2b3")
+mesh = SubResource("TorusMesh_64dih")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=103828561]
+transform = Transform3D(0.49155205, -0.46088845, 0.73888993, 0, 0.8484716, 0.52924085, -0.8708482, -0.26014948, 0.41706803, 4.5584493, 4.516819, 2.4883943)
+fov = 45.0
