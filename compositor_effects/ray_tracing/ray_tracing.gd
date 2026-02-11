@@ -20,9 +20,7 @@ func _init() -> void:
 	needs_normal_roughness = true
 	color_image_uniform = ImageUniform.new()
 	depth_sampler_uniform = SamplerUniform.new()
-	depth_sampler_uniform.sampler = ComputeHelper.rd.sampler_create(RDSamplerState.new())
 	normal_roughness_sampler_uniform = SamplerUniform.new()
-	normal_roughness_sampler_uniform.sampler = ComputeHelper.rd.sampler_create(RDSamplerState.new())
 	reload_shader()
 
 func reload_shader() -> void:
@@ -57,10 +55,9 @@ func _render_callback(_callback_type: int, render_data: RenderData) -> void:
 	var groups := Vector3i((size.x - 1.0) / 8.0 + 1.0, (size.y - 1.0) / 8.0 + 1.0, 1.0)
 	
 	var projection := render_data.get_render_scene_data().get_cam_projection()
-	var near := -projection.get_z_near()
-	var aspect := -projection.get_aspect()
+	var near := absf(projection.get_z_near())
 	var viewport_width := -2.0 * near * tan(deg_to_rad(projection.get_fov()) / 2.0)
-	var viewport_height := viewport_width / aspect
+	var viewport_height := viewport_width / absf(projection.get_aspect())
 	
 	var delta_x := Vector3(-viewport_width / size.x, 0.0, 0.0)
 	var delta_y := Vector3(0.0, viewport_height / size.y, 0.0)
@@ -77,20 +74,11 @@ func _render_callback(_callback_type: int, render_data: RenderData) -> void:
 	delta_x *= rotation
 	delta_y *= rotation
 	
-	var parameters := PackedFloat32Array([
-		size.x, size.y, 0.0, 0.0,
-		viewport_top_left.x, viewport_top_left.y, viewport_top_left.z, 0.0,
-		delta_x.x, delta_x.y, delta_x.z, 0.0,
-		delta_y.x, delta_y.y, delta_y.z, 0.0,
-		translation.x, translation.y, translation.z, 0.0,
+	var push_constant := ByteArrayHelper.array_to_bytes([
+		size, viewport_top_left, delta_x, delta_y, translation, frame
 	])
-	var push_constant := parameters.to_byte_array()
-	push_constant.resize(push_constant.size() + 4)
-	push_constant.encode_u32(push_constant.size() - 4, frame)
 	
 	color_image_uniform.texture = render_buffers.get_color_layer(0)
 	depth_sampler_uniform.texture = render_buffers.get_depth_layer(0)
 	normal_roughness_sampler_uniform.texture = render_buffers.get_texture("forward_clustered", "normal_roughness")
-	
 	shader.run(groups, push_constant)
-	shader.uniform_set_dirty = true
