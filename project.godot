@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Compositor Effect Library"
-config/tags=PackedStringArray("educational")
+config/tags=PackedStringArray()
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="uid://jeocpe0lqkho"
 
