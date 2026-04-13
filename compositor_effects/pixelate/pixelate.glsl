@@ -46,8 +46,8 @@ void main() {
 	if (uv.x >= size.x || uv.y >= size.y)
 		return;
 	
-	vec2 rounded_uv = floor(uv / size * TARGET_RESOLUTION) / TARGET_RESOLUTION;
-	vec4 screen_color = imageLoad(color_image, ivec2(floor(rounded_uv * size)));
+	vec2 rounded_uv = floor(uv_normalized * TARGET_RESOLUTION) / TARGET_RESOLUTION;
+	vec4 screen_color = imageLoad(color_image, ivec2(floor(rounded_uv * size)) + 1);
 	
 	ivec2 map_coord = ivec2(mod(rounded_uv * TARGET_RESOLUTION, 4.0));
 	float dither = BAYER_MATRIX[map_coord.x][map_coord.y] * INV_NUM_COLORS_SQUARED - 0.5;
